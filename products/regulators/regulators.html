@@ -12,10 +12,9 @@
     <title>SCT Solutions</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        @media screen and (max-width: 992px) {
+        @media screen and (max-width: 960px) {
             .navbar-dropdown {
                 display: none;
-                padding: 0%;
             }
 
             .nav-links.top-[9%] {
@@ -27,14 +26,71 @@
                 display: none;
             }
         }
-
-        @media screen and (max-width: 767px) {
-            .map {
-                width: 300px;
-            }
+        .card {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            background-color: #f2f2f2;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            perspective: 1000px;
+            box-shadow: 0 0 0 5px #ffffff80;
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin: 10px;
         }
-        .nav-links a.active {
-            border-bottom: 2px solid #338b93; /* Set the underline color */
+
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card svg {
+            width: 48px;
+            fill: #333;
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .card__content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: #f2f2f2;
+            transform: rotateX(-90deg);
+            transform-origin: bottom;
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2);
+        }
+
+        .card:hover .card__content {
+            transform: rotateX(0deg);
+            opacity: 1;
+        }
+
+        .card__title {
+            margin: 0;
+            font-size: 18px;
+            color: #333;
+            font-weight: 700;
+        }
+
+        .card__description {
+            margin: 10px 0 0;
+            font-size: 14px;
+            color: #777;
+            line-height: 1.4;
         }
 
         .hover-underline-animation {
@@ -64,13 +120,12 @@
     <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
 </head>
 
-<body class="font-[Poppins] bg-gradient-to-t from-[#b6f492] to-[#ffffff] no-repeat">
+<body class="font-[Poppins] bg-gradient-to-t from-[#b6f492] to-[#ffffff] no-repeat flex flex-col min-h-screen">
     <header class="bg-white">
         <nav class="flex justify-between items-center w-[92%] mx-auto z-10">
             <a href="/sctspl/index.html">
                 <img class="w-40 cursor-pointer" src="/sctspl/Images/logo.png" alt="...">
             </a>
-
             <div class="nav-links duration-500 md:static absolute bg-white md:min-h-fit min-h-[35vh] left-0 top-[-100%] md:w-auto w-full flex items-center px-5">
                 <ul class="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8">
                     
@@ -117,104 +172,76 @@
                     </li>
                 </ul>
             </div>
-
             <div class="flex items-center gap-6">
                 <button onclick="redirectToContact()" class="bg-gradient-to-t from-[#b6f492] to-[#338b93] text-white px-5 py-2 rounded-full hover:bg-[#87acec]">Contact Us</button>
                 <ion-icon onclick="onToggleMenu(this)" name="menu" class="text-3xl cursor-pointer md:hidden"></ion-icon>
             </div>
         </nav>
     </header>   
-    
-    <section>
-        <div class="container pb-6 py-12 mx-auto">
-            <div class="text-center">
-                <h1 class="mt-2 text-2xl font-semibold text-gray-800 md:text-3xl">Get in touch</h1>
-            </div>
-    
-            <div class=" contact-info-container grid grid-cols-1 gap-12 mt-10 lg:grid-cols-3">
-                <div class="flex flex-col items-center justify-center text-center">
-                    <span class="p-3 text-blue-500 rounded-full bg-blue-100/80 dark:bg-gray-800">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
-                        </svg>
-                    </span>
-    
-                    <h2 class="mt-4 text-lg font-medium text-gray-800">Email</h2>
-                    <a class="mt-2 text-blue-800" href="mailto:chinmay.panchal@sctspl.com">chinmay.panchal@sctspl.com</a>
-                    <a class="mt-1 text-blue-800" href="mailto:nayan.jain@sctspl.com">nayan.jain@sctspl.com</a>
-                    <a class="mt-1 text-blue-800" href="mailto:sales1@sctspl.com">sales1@sctspl.com</a>
-                </div>
-    
-                <div class="flex flex-col items-center justify-center text-center">
-                    <span class="p-3 text-blue-500 rounded-full bg-blue-100/80 dark:bg-gray-800">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-                        </svg>
-                    </span>
-                    
-                    <h2 class="mt-4 text-lg font-medium text-gray-800">Office</h2>
-                    <a class="mt-2 text-blue-800" href="https://maps.app.goo.gl/x8dYGDLaB2i9ADyi9">605, 6th Floor, Filix Condolium, Opposite Asian paints, LBS Marg Road, Bhandup West, Mumbai-400078</a>
-                </div>
-    
-                <div class="flex flex-col items-center justify-center text-center">
-                    <span class="p-3 text-blue-500 rounded-full bg-blue-100/80 dark:bg-gray-800">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
-                        </svg>
-                    </span>
-                    
-                    <h2 class="mt-4 text-lg font-medium text-gray-800">Phone</h2>
-                    <a class="mt-1 text-blue-800" href="tel:8928024703">+91 8928024703</a>
-                    <a class="mt-1 text-blue-800" href="tel:9029426185">+91 9029426185</a>
-                    <a class="hidden md:block"><br></a>
-                </div>
+
+    <div>
+        <img class="hidden md:block" src="/sctspl/products/Images/regulators/header-desktop.png" alt="">
+        <img class="block md:hidden" src="/sctspl/products/Images/regulators/header-mobile.png" alt="">
+    </div>
+
+    <br>
+
+    <!-- After the main navbar -->
+<nav class="">
+    <div class="container mx-auto flex items-center justify-evenly ">
+        <div class="flex items-center space-x-8">
+            <!-- Search bar -->
+            <div class="relative">
+                <input type="text" id="productSearch" class="border border-gray-300 bg-white h-10 px-4 pr-10 rounded-lg focus:outline-none" placeholder="Search...">
+                <button class="absolute right-0 top-0 mt-3 mr-4" onclick="performSearch()">
+                    <svg class="text-gray-600 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M10 0C4.486 0 0 4.486 0 10c0 2.482.896 4.77 2.38 6.566l-4.61 6.16 1.952 1.464 4.56-6.086A9.936 9.936 0 0010 20c5.514 0 10-4.486 10-10S15.514 0 10 0zm0 18a8 8 0 110-16 8 8 0 010 16z"/>
+                    </svg>
+                </button>
             </div>
         </div>
-        <div class="container pb-6 py-12 mx-auto text-center">
-            <!-- Existing content... -->
-    
-            <!-- New form content -->
-            <div class="grid grid-cols-1 gap-12 mt-10 lg:grid-cols-2">
-                <!-- Form -->
-                <div class="lg:border lg:border-gray-300 lg:rounded-md lg:p-6 bg-#b6f492 p-4 rounded-md shadow-md">
-                    <!-- Form -->
-                    <form action="https://api.web3forms.com/submit" method="POST">
-                        <input type="hidden" name="access_key" value="b7396014-d286-4f31-9e51-136a6788f939">
-                        <div class="mb-4">
-                            <label for="name" class="block text-sm font-medium text-gray-800">Name</label>
-                            <input type="text" id="name" name="name" class="mt-1 p-2 w-full border border-gray-300 rounded-md">
-                        </div>
-                        
-                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                            <div class="mb-4">
-                                <label for="email" class="block text-sm font-medium text-gray-800">Email</label>
-                                <input type="email" id="email" name="email" class="mt-1 p-2 w-full border border-gray-300 rounded-md">
-                            </div>
-                            <div class="mb-4">
-                                <label for="phone" class="block text-sm font-medium text-gray-800">Phone Number</label>
-                                <input type="tel" id="phone" name="phone" class="mt-1 p-2 w-full border border-gray-300 rounded-md">
-                            </div>
-                        </div>
-                        <div class="mb-4">
-                            <label for="purpose" class="block text-sm font-medium text-gray-800">Purpose of Contacting</label>
-                            <textarea id="purpose" name="purpose" rows="3" class="mt-1 p-2 w-full border border-gray-300 rounded-md" style="height: 70px;"></textarea>
-                        </div>
-                
-                        <div class="flex justify-end">
-                            <button type="submit" class="bg-gradient-to-t from-[#b6f492] to-[#338b93] text-white px-5 py-2 rounded-full hover:bg-[#87acec]">Submit</button>
-                        </div>
-                    </form>
+    </div>
+</nav>
+
+<section class="max-w-4l mx-auto p-4 justify-evenly">
+    <div class="flex flex-col gap-4">
+        <div class="border p-4 rounded-md product-catogery" id="catogery1">
+            <h2 class="text-lg font-semibold mb-4">Ultra-High Purity Single Stage</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-20">
+                <!-- Product card for Category 1 -->
+                <div class="card relative overflow-hidden bg-white p-4 rounded-md shadow-md transition-transform duration-600 transform scale-100 hover:scale-105 hover:shadow-xl">
+                    <img src="/sctspl/products/Images/regulators/low-flow.jpg" alt="">
+                    <div class="card__content">
+                        <p class="card__title">Low Flow Regulator</p>
+                        <p class="card__description"></p>
+                    </div>
                 </div>
-                
-                <!-- Maps -->
-                <div class="w-9/10 h-96 border border-blue-500 rounded-md shadow-md mx-10">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d18021.9947579853!2d72.91902612290404!3d19.15091444282867!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b9b18fe9f6a7%3A0x7fa376a0e7022678!2sFilix%20Towers!5e0!3m2!1sen!2sin!4v1708957092056!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-                    </iframe>
+        
+                <!-- Add more product cards for Category 1 as needed -->
+                <div class="card relative overflow-hidden bg-white p-4 rounded-md shadow-md transition-transform duration-600 transform scale-100 hover:scale-105 hover:shadow-xl">
+                    <img src="/sctspl/products/Images/regulators/medium-flow.jpg" alt=" ">
+                    <div class="card__content">
+                        <p class="card__title">Medium Flow Regulator</p>
+                        <p class="card__description"></p>
+                    </div>
                 </div>
+                <div class="card relative overflow-hidden bg-white p-4 rounded-md shadow-md transition-transform duration-600 transform scale-100 hover:scale-105 hover:shadow-xl">
+                    <img src="/sctspl/products/Images/regulators/high-flow.jpg" alt=" ">
+                    <div class="card__content">
+                        <p class="card__title">High Flow Regulator</p>
+                        <p class="card__description"></p>
+                    </div>
+                </div>
+                <!-- Add more product cards for Category 1 as needed -->
             </div>
-        </div>
-    </section>
+        </div>        
+    </div>
+</section>
+
+
+<!-- ... Remaining script and closing tags ... -->
+
+    
     <br>
 
     <footer class="bg-gray-800 text-white text-center">
@@ -260,7 +287,7 @@
             &copy; 2024 SCTSPL. All rights reserved.
         </div>
     </footer>
-    
+
     <script>
         const navDropdown = document.querySelector('.navbar-dropdown');
 
@@ -283,11 +310,69 @@
             e.name = e.name === 'menu' ? 'close' : 'menu'
             navLinks.classList.toggle('top-[9%]')
         }
-
         function redirectToContact() {
             // Redirect to contact.html
-            window.location.href = "#";
+            window.location.href = "/sctspl/ContactUs/contact.html";
         }
+        const productCards = document.querySelectorAll('.card');
+
+        productCards.forEach((card) => {
+            const description = card.querySelector('.card__content');
+
+            card.addEventListener('mouseenter', () => {
+                card.classList.add('hover');
+                description.style.transform = 'rotateX(0deg)';
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.classList.remove('hover');
+                description.style.transform = 'rotateX(-90deg)';
+            });
+        });
+        function showCategory(category) {
+            // Hide all category boxes
+            var allCategories = document.querySelectorAll('.category-box');
+            allCategories.forEach(function (cat) {
+              cat.style.display = 'none';
+            });
+      
+            // Show the selected category box
+            var selectedCategory = document.getElementById('category' + category);
+            if (selectedCategory) {
+              selectedCategory.style.display = 'block';
+            }
+          }
+          function performSearch() {
+            var searchTerm = document.getElementById('productSearch').value.toLowerCase();
+            var productCategories = document.querySelectorAll('.product-catogery');
+        
+            productCategories.forEach(function (category) {
+                var categoryTitle = category.querySelector('h2').innerText.toLowerCase();
+                var productCards = category.querySelectorAll('.card');
+        
+                productCards.forEach(function (card) {
+                    var cardTitle = card.querySelector('.card__title').innerText.toLowerCase();
+                    var cardDescription = card.querySelector('.card__description').innerText.toLowerCase();
+        
+                    // Check if the search term is present in the category title, card title, or card description
+                    if (categoryTitle.includes(searchTerm) || cardTitle.includes(searchTerm) || cardDescription.includes(searchTerm)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+        
+                // Check if any card within the category is visible, and show/hide the category accordingly
+                var visibleCards = category.querySelectorAll('.card:not([style*="display: none"])');
+                if (visibleCards.length > 0) {
+                    category.style.display = 'block';
+                } else {
+                    category.style.display = 'none';
+                }
+            });
+        }
+        
+      
     </script>
 </body>
 
