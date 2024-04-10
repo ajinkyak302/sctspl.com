@@ -12,10 +12,9 @@
     <title>SCT Solutions</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        @media screen and (max-width: 992px) {
+        @media screen and (max-width: 960px) {
             .navbar-dropdown {
                 display: none;
-                padding: 0%;
             }
 
             .nav-links.top-[9%] {
@@ -28,11 +27,32 @@
             }
         }
 
-        @media screen and (max-width: 767px) {
-            .map {
-                width: 300px;
-            }
+        @media only screen and (min-width: 1024px) and (max-width: 1279px) {
+            
         }
+
+        .middle{
+            display: grid;
+            justify-content: center;
+            align-items: center;
+        }  
+        
+        .logos{
+            display: grid;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.5s ease;
+        }
+
+        .logos img{
+            aspect-ratio: 3/2;
+            object-fit: contain;
+        }
+
+        .logos:hover{
+            transform: scale(1.1);
+        }
+
         .nav-links a.active {
             border-bottom: 2px solid #338b93; /* Set the underline color */
         }
@@ -64,13 +84,13 @@
     <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
 </head>
 
-<body class="font-[Poppins] bg-gradient-to-t from-[#b6f492] to-[#ffffff] no-repeat">
+<body class="font-[Poppins] bg-gradient-to-t from-[#b6f492] to-[#ffffff] no-repeat flex flex-col min-h-screen">
     <header class="bg-white">
         <nav class="flex justify-between items-center w-[92%] mx-auto z-10">
             <a href="/index.html">
                 <img class="w-40 cursor-pointer" src="/Images/logo.png" alt="...">
             </a>
-
+            
             <div class="nav-links duration-500 md:static absolute bg-white md:min-h-fit min-h-[35vh] left-0 top-[-100%] md:w-auto w-full flex items-center px-5">
                 <ul class="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8">
                     
@@ -125,98 +145,84 @@
         </nav>
     </header>   
     
-    <section>
-        <div class="container pb-6 py-12 mx-auto">
-            <div class="text-center">
-                <h1 class="mt-2 text-2xl font-semibold text-gray-800 md:text-3xl">Get in touch</h1>
-            </div>
-    
-            <div class=" contact-info-container grid grid-cols-1 gap-12 mt-10 lg:grid-cols-3">
-                <div class="flex flex-col items-center justify-center text-center">
-                    <span class="p-3 text-blue-500 rounded-full bg-blue-100/80 dark:bg-gray-800">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
-                        </svg>
-                    </span>
-    
-                    <h2 class="mt-4 text-lg font-medium text-gray-800">Email</h2>
-                    <a class="mt-2 text-blue-800" href="mailto:chinmay.panchal@sctspl.com">chinmay.panchal@sctspl.com</a>
-                    <a class="mt-1 text-blue-800" href="mailto:nayan.jain@sctspl.com">nayan.jain@sctspl.com</a>
-                    <a class="mt-1 text-blue-800" href="mailto:sales1@sctspl.com">sales1@sctspl.com</a>
-                </div>
-    
-                <div class="flex flex-col items-center justify-center text-center">
-                    <span class="p-3 text-blue-500 rounded-full bg-blue-100/80 dark:bg-gray-800">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-                        </svg>
-                    </span>
-                    
-                    <h2 class="mt-4 text-lg font-medium text-gray-800">Office</h2>
-                    <a class="mt-2 text-blue-800" href="https://maps.app.goo.gl/x8dYGDLaB2i9ADyi9">605, 6th Floor, Filix Condolium, Opposite Asian paints, LBS Marg Road, Bhandup West, Mumbai-400078</a>
-                </div>
-    
-                <div class="flex flex-col items-center justify-center text-center">
-                    <span class="p-3 text-blue-500 rounded-full bg-blue-100/80 dark:bg-gray-800">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
-                        </svg>
-                    </span>
-                    
-                    <h2 class="mt-4 text-lg font-medium text-gray-800">Phone</h2>
-                    <a class="mt-1 text-blue-800" href="tel:8928024703">+91 8928024703</a>
-                    <a class="mt-1 text-blue-800" href="tel:9029426185">+91 9029426185</a>
-                    <a class="hidden md:block"><br></a>
-                </div>
-            </div>
-        </div>
-        
-        <div class="container pb-6 py-12 mx-auto text-center">
-            <!-- Existing content... -->
-    
-            <!-- New form content -->
-            <div class="grid grid-cols-1 gap-12 mt-10 lg:grid-cols-2">
-                <!-- Form -->
-                <div class="lg:border lg:border-gray-300 lg:rounded-md lg:p-6 bg-#b6f492 p-4 rounded-md shadow-md">
-                    <!-- Form -->
-                    <form action="https://api.web3forms.com/submit" method="POST">
-                        <input type="hidden" name="access_key" value="b7396014-d286-4f31-9e51-136a6788f939">
-                        <div class="mb-4">
-                            <label for="name" class="block text-sm font-medium text-gray-800">Name</label>
-                            <input type="text" id="name" name="name" class="mt-1 p-2 w-full border border-gray-300 rounded-md">
-                        </div>
-                        
-                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                            <div class="mb-4">
-                                <label for="email" class="block text-sm font-medium text-gray-800">Email</label>
-                                <input type="email" id="email" name="email" class="mt-1 p-2 w-full border border-gray-300 rounded-md">
-                            </div>
-                            <div class="mb-4">
-                                <label for="phone" class="block text-sm font-medium text-gray-800">Phone Number</label>
-                                <input type="tel" id="phone" name="phone" class="mt-1 p-2 w-full border border-gray-300 rounded-md">
-                            </div>
-                        </div>
-                        <div class="mb-4">
-                            <label for="purpose" class="block text-sm font-medium text-gray-800">Purpose of Contacting</label>
-                            <textarea id="purpose" name="purpose" rows="3" class="mt-1 p-2 w-full border border-gray-300 rounded-md" style="height: 70px;"></textarea>
-                        </div>
-                
-                        <div class="flex justify-end">
-                            <button type="submit" class="bg-gradient-to-t from-[#b6f492] to-[#338b93] text-white px-5 py-2 rounded-full hover:bg-[#87acec]">Submit</button>
-                        </div>
-                    </form>
-                </div>
-                
-                <!-- Maps -->
-                <div class="w-9/10 h-96 border border-blue-500 rounded-md shadow-md mx-10">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d18021.9947579853!2d72.91902612290404!3d19.15091444282867!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b9b18fe9f6a7%3A0x7fa376a0e7022678!2sFilix%20Towers!5e0!3m2!1sen!2sin!4v1708957092056!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-                    </iframe>
-                </div>
-            </div>
-        </div>
+    <section class="text-gray-800">
+        <h2 class="text-3xl font-bold mt-4 text-center sm:text-5xl">SCT Solutions</h2>
+        <p class="max-w-3xl mx-auto mt-4 text-2xl font-bold text-center">Products</p>
+        <p class="max-w-3xl mx-auto mt-4 text-xl text-center">"We are a prominent supplier of essential components, specializing in tubes, valves, fittings, and critical consumables pivotal to the core of semiconductor and solar manufacturing"</p>
     </section>
-    
+
+    <br>
+
+    <div class="middle mx-auto px-10 text">
+        <div class="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-5 gap-20">
+            
+            <div class="middle logos">
+                <div class="max-w-sm border border-gray-200 rounded-lg" style="border-color: #225400; box-shadow: #225400;">
+                    <a href="/products/tubes/tubes.html">
+                        <img class="rounded-t-lg h-60 p-3" src="/Images/Cards/Tubes copy.png" alt="" />
+                    </a>
+                    <div class="middle my-2">
+                        <a href="/products/tubes/tubes.html">
+                            <h5 class="mb-2 text-center text-xl tracking-tight text-gray-800">Tubes</h5>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="middle logos">
+                <div class="max-w-sm border border-gray-200 rounded-lg" style="border-color: #225400; box-shadow: #225400;">
+                    <a href="/products/valves/valves.html">
+                        <img class="rounded-t-lg h-60" src="/Images/Cards/Valves.png" alt="" />
+                    </a>
+                    <div class="middle my-2">
+                        <a href="/products/valves/valves.html">
+                            <h5 class="mb-2 text-center text-xl tracking-tight text-gray-800">Valves</h5>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="middle logos">
+                <div class="max-w-sm border border-gray-200 rounded-lg" style="border-color: #225400; box-shadow: #225400;">
+                    <a href="/products/fittings/fittings.html">
+                        <img class="rounded-t-lg h-60" src="/Images/Cards/Fittings.png" alt="" />
+                    </a>
+                    <div class="middle my-2">
+                        <a href="/products/fittings/fittings.html">
+                            <h5 class="mb-2 text-center text-xl tracking-tight text-gray-800">Fittings</h5>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="middle logos">
+                <div class="max-w-sm border border-gray-200 rounded-lg" style="border-color: #225400; box-shadow: #225400;">
+                    <a href="/products/regulators/regulators.html">
+                        <img class="rounded-t-lg h-60" src="/Images/Cards/Regulators.png" alt="" />
+                    </a>
+                    <div class="middle my-2">
+                        <a href="/products/regulators/regulators.html">
+                            <h5 class="mb-2 text-center text-xl tracking-tight text-gray-800">Regulators</h5>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="middle logos">
+                <div class="max-w-sm border border-gray-200 rounded-lg" style="border-color: #225400; box-shadow: #225400;">
+                    <a href="/products/accessories/accessories.html">
+                        <img class="rounded-t-lg h-60" src="/Images/Cards/Accessories.png" alt="" />
+                    </a>
+                    <div class="middle my-2">
+                        <a href="/products/accessories/accessories.html">
+                            <h5 class="mb-2 text-center text-xl tracking-tight text-gray-800">Accessories</h5>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <br>
 
     <footer class="bg-gray-800 text-white text-center">
@@ -286,10 +292,9 @@
             e.name = e.name === 'menu' ? 'close' : 'menu'
             navLinks.classList.toggle('top-[9%]')
         }
-
         function redirectToContact() {
             // Redirect to contact.html
-            window.location.href = "#";
+            window.location.href = "/ContactUs/contact.html";
         }
     </script>
 </body>
