@@ -15,37 +15,63 @@
         :root {
             --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             --accent-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            --card-shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.15);
+            --sunset-gradient: linear-gradient(135deg, #ff6b6b 0%, #feca57 50%, #48dbfb 100%);
+            --cosmic-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            --card-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+            --card-shadow-hover: 0 30px 60px rgba(0, 0, 0, 0.12);
+            --card-shadow-intense: 0 40px 80px rgba(0, 0, 0, 0.15);
             --border-radius: 16px;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --border-radius-lg: 24px;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
 
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background-size: 400% 400%;
             background-attachment: fixed;
             min-height: 100vh;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .glass-effect {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
 
         .gradient-text {
-            background: var(--primary-gradient);
+            background: var(--sunset-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
         .content-section {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border-radius: var(--border-radius);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--border-radius-lg);
             padding: 3rem 2rem;
             margin: 2rem;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+        }
+
+        .content-section:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--card-shadow-hover);
+        }
+
+        .navbar-dropdown {
+            backdrop-filter: blur(20px);
             box-shadow: var(--card-shadow);
         }
 
@@ -70,6 +96,12 @@
             align-items: center;
             transition: var(--transition);
             mix-blend-mode: multiply;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
         }
 
         .logos img{
@@ -78,39 +110,42 @@
         }
 
         .logos:hover{
-            transform: translateY(-8px) scale(1.05);
+            transform: translateY(-15px) scale(1.08);
+            animation-play-state: paused;
         }
 
         .enhanced-button {
-            background: var(--accent-gradient);
+            background: var(--sunset-gradient);
             border: none;
-            border-radius: 50px;
-            padding: 12px 32px;
+            border-radius: 60px;
+            padding: 16px 40px;
             color: white;
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 1.1rem;
             cursor: pointer;
-            transition: var(--transition);
-            box-shadow: 0 4px 15px rgba(67, 233, 123, 0.3);
+            transition: var(--transition-bounce);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .enhanced-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(67, 233, 123, 0.4);
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.6);
         }
 
         .customer-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: var(--border-radius);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: var(--border-radius-lg);
             padding: 2rem;
             box-shadow: var(--card-shadow);
             transition: var(--transition);
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 120px;
+            height: 140px;
             position: relative;
             overflow: hidden;
         }
@@ -121,15 +156,16 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 4px;
-            background: var(--accent-gradient);
+            height: 6px;
+            background: var(--sunset-gradient);
             transform: scaleX(0);
             transition: var(--transition);
         }
 
         .customer-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--card-shadow-hover);
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: var(--card-shadow-intense);
+            border-color: rgba(255, 255, 255, 0.5);
         }
 
         .customer-card:hover::before {
@@ -147,10 +183,10 @@
             position: absolute;
             width: 100%;
             transform: scaleX(0);
-            height: 3px;
+            height: 4px;
             bottom: 0;
             left: 0;
-            background: var(--accent-gradient);
+            background: var(--sunset-gradient);
             transform-origin: bottom right;
             transition: var(--transition);
             border-radius: 2px;
@@ -159,6 +195,17 @@
         .hover-underline-animation:hover:after {
             transform: scaleX(1);
             transform-origin: bottom left;
+        }
+
+        .page-title {
+            font-size: 5rem;
+            font-weight: 800;
+            background: var(--sunset-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+            margin-bottom: 2rem;
         }
     </style>
     <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
@@ -223,97 +270,97 @@
     </header>   
 
     <section class="content-section">
-        <h2 class="text-4xl font-bold text-center gradient-text mb-4">SCT Solutions</h2>
-        <h3 class="text-2xl font-bold text-center text-gray-800 mb-6">Our Customers Make Us Great</h3>
-        <p class="max-w-4xl mx-auto text-lg text-gray-600 text-center leading-relaxed">"Welcome to SCT Solutions, where we proudly serve as your partner in semiconductor and solar industry solutions. Our success is built on the trust and partnership of industry-leading companies who rely on our expertise and quality products."</p>
+        <h2 class="page-title">SCT Solutions</h2>
+        <h3 class="text-3xl font-bold text-center gradient-text mb-8">Our Customers Make Us Great</h3>
+        <p class="max-w-4xl mx-auto text-xl text-white font-medium text-center leading-relaxed">"Welcome to SCT Solutions, where we proudly serve as your partner in semiconductor and solar industry solutions. Our success is built on the trust and partnership of industry-leading companies who rely on our expertise and quality products."</p>
     </section>   
 
     <div class="container mx-auto px-4 lg:px-10 mb-16">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div class="logos">
                 <div class="customer-card">
-                    <img src="/Customers/Images/adani.png" alt="Adani" class="max-w-full max-h-16 object-contain">
+                    <img src="/Customers/Images/adani.png" alt="Adani" class="max-w-full max-h-20 object-contain">
                 </div>
             </div>
             <div class="logos">
                 <div class="customer-card">
-                    <img src="/Customers/Images/agem.png" alt="AGEM" class="max-w-full max-h-16 object-contain">
+                    <img src="/Customers/Images/agem.png" alt="AGEM" class="max-w-full max-h-20 object-contain">
                 </div>
             </div>
             <div class="logos">
                 <div class="customer-card">
-                    <img src="/Customers/Images/logosan.png" alt="Logosan" class="max-w-full max-h-16 object-contain">
+                    <img src="/Customers/Images/logosan.png" alt="Logosan" class="max-w-full max-h-20 object-contain">
                 </div>
             </div>
             <div class="logos">
                 <div class="customer-card">
-                    <img src="/Customers/Images/winbond.png" alt="Winbond" class="max-w-full max-h-16 object-contain">
+                    <img src="/Customers/Images/winbond.png" alt="Winbond" class="max-w-full max-h-20 object-contain">
                 </div>
             </div>
             <div class="logos">
                 <div class="customer-card">
-                    <img src="/Customers/Images/bhel.png" alt="BHEL" class="max-w-full max-h-16 object-contain">
+                    <img src="/Customers/Images/bhel.png" alt="BHEL" class="max-w-full max-h-20 object-contain">
                 </div>
             </div>
             <div class="logos">
                 <div class="customer-card">
-                    <img src="/Customers/Images/iiser.png" alt="IISER" class="max-w-full max-h-16 object-contain">
+                    <img src="/Customers/Images/iiser.png" alt="IISER" class="max-w-full max-h-20 object-contain">
                 </div>
             </div>
             <div class="logos">
                 <div class="customer-card">
-                    <img src="/Customers/Images/iit kanpur.png" alt="IIT Kanpur" class="max-w-full max-h-16 object-contain">
+                    <img src="/Customers/Images/iit kanpur.png" alt="IIT Kanpur" class="max-w-full max-h-20 object-contain">
                 </div>
             </div>
             <div class="logos">
                 <div class="customer-card">
-                    <img src="/Customers/Images/indian-oil.png" alt="Indian Oil" class="max-w-full max-h-16 object-contain">
+                    <img src="/Customers/Images/indian-oil.png" alt="Indian Oil" class="max-w-full max-h-20 object-contain">
                 </div>
             </div>
             <div class="logos">
                 <div class="customer-card">
-                    <img src="/Customers/Images/isro.png" alt="ISRO" class="max-w-full max-h-16 object-contain">
+                    <img src="/Customers/Images/isro.png" alt="ISRO" class="max-w-full max-h-20 object-contain">
                 </div>
             </div>
             <div class="logos">
                 <div class="customer-card">
-                    <img src="/Customers/Images/reliance-industries-limited.png" alt="Reliance Industries" class="max-w-full max-h-16 object-contain">
+                    <img src="/Customers/Images/reliance-industries-limited.png" alt="Reliance Industries" class="max-w-full max-h-20 object-contain">
                 </div>
             </div>
             <div class="logos">
                 <div class="customer-card">
-                    <img src="/Customers/Images/tata-power.png" alt="Tata Power" class="max-w-full max-h-16 object-contain">
+                    <img src="/Customers/Images/tata-power.png" alt="Tata Power" class="max-w-full max-h-20 object-contain">
                 </div>
             </div>
             <div class="logos">
                 <div class="customer-card">
-                    <img src="/Customers/Images/cmi.png" alt="CMI" class="max-w-full max-h-16 object-contain">
+                    <img src="/Customers/Images/cmi.png" alt="CMI" class="max-w-full max-h-20 object-contain">
                 </div>
             </div>
             <div class="logos">
                 <div class="customer-card">
-                    <img src="/Customers/Images/government-of-puducherry.png" alt="Government of Puducherry" class="max-w-full max-h-16 object-contain">
+                    <img src="/Customers/Images/government-of-puducherry.png" alt="Government of Puducherry" class="max-w-full max-h-20 object-contain">
                 </div>
             </div>
             <div class="logos">
                 <div class="customer-card">
-                    <img src="/Customers/Images/jspl.png" alt="JSPL" class="max-w-full max-h-16 object-contain">
+                    <img src="/Customers/Images/jspl.png" alt="JSPL" class="max-w-full max-h-20 object-contain">
                 </div>
             </div>
             <div class="logos">
                 <div class="customer-card">
-                    <img src="/Customers/Images/bharat-electronics.png" alt="Bharat Electronics" class="max-w-full max-h-16 object-contain">
+                    <img src="/Customers/Images/bharat-electronics.png" alt="Bharat Electronics" class="max-w-full max-h-20 object-contain">
                 </div>
             </div>
             <div class="logos">
                 <div class="customer-card">
-                    <img src="/Customers/Images/air-liquide.png" alt="Air Liquide" class="max-w-full max-h-16 object-contain">
+                    <img src="/Customers/Images/air-liquide.png" alt="Air Liquide" class="max-w-full max-h-20 object-contain">
                 </div>
             </div>
         </div>
     </div>
 
-    <footer class="bg-gradient-to-r from-gray-900 to-gray-800 text-white text-center mt-auto">
+    <footer class="bg-gradient-to-r from-gray-900 via-purple-900 to-gray-800 text-white text-center mt-auto">
         <div class="main-footer">
             <div class="container mx-auto py-8">
                 <div class="grid grid-cols-1 gap-y-6 md:grid-cols-2 lg:grid-cols-4">
@@ -321,45 +368,45 @@
                         <h4 class="text-white text-lg font-bold mb-4">Contact Information</h4>
                         <div class="space-y-2">
                             <p class="text-gray-300 font-semibold">Call Us</p>
-                            <a class="block text-blue-400 hover:text-blue-300 transition-colors" href="tel:8928024703">+91 8928024703</a>
-                            <a class="block text-blue-400 hover:text-blue-300 transition-colors" href="tel:9029426185">+91 9029426185</a>
+                            <a class="block text-cyan-400 hover:text-cyan-300 transition-colors" href="tel:8928024703">+91 8928024703</a>
+                            <a class="block text-cyan-400 hover:text-cyan-300 transition-colors" href="tel:9029426185">+91 9029426185</a>
                             <p class="text-gray-300 font-semibold mt-4">Email Us</p>
-                            <a class="block text-blue-400 hover:text-blue-300 transition-colors text-sm" href="mailto:chinmay.panchal@sctspl.com">chinmay.panchal@sctspl.com</a>
-                            <a class="block text-blue-400 hover:text-blue-300 transition-colors text-sm" href="mailto:nayan.jain@sctspl.com">nayan.jain@sctspl.com</a>
-                            <a class="block text-blue-400 hover:text-blue-300 transition-colors text-sm" href="mailto:sales1@sctspl.com">sales1@sctspl.com</a>
+                            <a class="block text-cyan-400 hover:text-cyan-300 transition-colors text-sm" href="mailto:chinmay.panchal@sctspl.com">chinmay.panchal@sctspl.com</a>
+                            <a class="block text-cyan-400 hover:text-cyan-300 transition-colors text-sm" href="mailto:nayan.jain@sctspl.com">nayan.jain@sctspl.com</a>
+                            <a class="block text-cyan-400 hover:text-cyan-300 transition-colors text-sm" href="mailto:sales1@sctspl.com">sales1@sctspl.com</a>
                         </div>
                     </div>
                     <div class="column hidden md:block">
                         <h4 class="text-white text-lg font-bold mb-4">Quick Links</h4>
                         <div class="space-y-2">
-                            <a class="block text-blue-400 hover:text-blue-300 transition-colors" href="/index.html">Home</a>
-                            <a class="block text-blue-400 hover:text-blue-300 transition-colors" href="/AboutUs/about.html">About Us</a>
-                            <a class="block text-blue-400 hover:text-blue-300 transition-colors" href="/products/products-categories.html">Products</a>
-                            <a class="block text-blue-400 hover:text-blue-300 transition-colors" href="/Customers/customers.html">Customers</a>
-                            <a class="block text-blue-400 hover:text-blue-300 transition-colors" href="/ContactUs/contact.html">Contact Us</a>
+                            <a class="block text-cyan-400 hover:text-cyan-300 transition-colors" href="/index.html">Home</a>
+                            <a class="block text-cyan-400 hover:text-cyan-300 transition-colors" href="/AboutUs/about.html">About Us</a>
+                            <a class="block text-cyan-400 hover:text-cyan-300 transition-colors" href="/products/products-categories.html">Products</a>
+                            <a class="block text-cyan-400 hover:text-cyan-300 transition-colors" href="/Customers/customers.html">Customers</a>
+                            <a class="block text-cyan-400 hover:text-cyan-300 transition-colors" href="/ContactUs/contact.html">Contact Us</a>
                         </div>
                     </div>
                     <div class="column hidden md:block">
                         <h4 class="text-white text-lg font-bold mb-4">Products</h4>
                         <div class="space-y-2">
-                            <a class="block text-blue-400 hover:text-blue-300 transition-colors" href="/products/tubes/tubes.html">Tubes</a>
-                            <a class="block text-blue-400 hover:text-blue-300 transition-colors" href="/products/valves/valves.html">Valves</a>
-                            <a class="block text-blue-400 hover:text-blue-300 transition-colors" href="/products/fittings/fittings.html">Fittings</a>
-                            <a class="block text-blue-400 hover:text-blue-300 transition-colors" href="/products/regulators/regulators.html">Regulators</a>
-                            <a class="block text-blue-400 hover:text-blue-300 transition-colors" href="/products/accessories/accessories.html">Accessories</a>
+                            <a class="block text-cyan-400 hover:text-cyan-300 transition-colors" href="/products/tubes/tubes.html">Tubes</a>
+                            <a class="block text-cyan-400 hover:text-cyan-300 transition-colors" href="/products/valves/valves.html">Valves</a>
+                            <a class="block text-cyan-400 hover:text-cyan-300 transition-colors" href="/products/fittings/fittings.html">Fittings</a>
+                            <a class="block text-cyan-400 hover:text-cyan-300 transition-colors" href="/products/regulators/regulators.html">Regulators</a>
+                            <a class="block text-cyan-400 hover:text-cyan-300 transition-colors" href="/products/accessories/accessories.html">Accessories</a>
                         </div>
                     </div>
                     <div class="column">
                         <h4 class="text-white text-lg font-bold mb-4">Find Us</h4>
                         <div class="space-y-2">
                             <p class="text-gray-300 font-semibold">SCT Solutions</p>
-                            <a class="text-blue-400 hover:text-blue-300 transition-colors text-sm leading-relaxed" href="https://maps.app.goo.gl/x8dYGDLaB2i9ADyi9">605, 6th Floor, Filix Condolium, Opposite Asian paints, LBS Marg Road, Bhandup West, Mumbai-400078</a>
+                            <a class="text-cyan-400 hover:text-cyan-300 transition-colors text-sm leading-relaxed" href="https://maps.app.goo.gl/x8dYGDLaB2i9ADyi9">605, 6th Floor, Filix Condolium, Opposite Asian paints, LBS Marg Road, Bhandup West, Mumbai-400078</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="bg-gray-900 text-gray-300 py-6 border-t border-gray-700">
+        <div class="bg-gray-900 text-gray-300 py-6 border-t border-purple-700">
             <div class="container mx-auto px-4">
                 <p class="text-center">&copy; 2024 SCTSPL. All rights reserved.</p>
                 <p class="text-center text-sm mt-1">GST: 27ABMCS4612E1ZC</p>
@@ -393,21 +440,7 @@
             // Redirect to contact.html
             window.location.href = "/ContactUs/contact.html";
         }
-        const productCards = document.querySelectorAll('.card');
 
-        productCards.forEach((card) => {
-            const description = card.querySelector('.card__content');
-
-            card.addEventListener('mouseenter', () => {
-                card.classList.add('hover');
-                description.style.transform = 'rotateX(0deg)';
-            });
-
-            card.addEventListener('mouseleave', () => {
-                card.classList.remove('hover');
-                description.style.transform = 'rotateX(-90deg)';
-            });
-        });
     </script>
 </body>
 

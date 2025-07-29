@@ -11,35 +11,50 @@
     <link rel="icon" href="/Images/tab-logo.png" type="image/x-icon">
     <title>SCT Solutions</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
-    
     <style>
         :root {
             --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             --accent-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-            --dark-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --warm-gradient: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            --cool-gradient: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            --sunset-gradient: linear-gradient(135deg, #ff6b6b 0%, #feca57 50%, #48dbfb 100%);
             --light-bg: #fafbfc;
-            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            --card-shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.15);
+            --card-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+            --card-shadow-hover: 0 30px 60px rgba(0, 0, 0, 0.12);
+            --card-shadow-intense: 0 40px 80px rgba(0, 0, 0, 0.15);
             --border-radius: 16px;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --border-radius-lg: 24px;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
 
         * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
         }
 
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background-size: 400% 400%;
             background-attachment: fixed;
             min-height: 100vh;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .glass-effect {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
 
         .gradient-text {
@@ -49,10 +64,16 @@
             background-clip: text;
         }
 
+        .gradient-text-sunset {
+            background: var(--sunset-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
         @media screen and (max-width: 960px) {
             .navbar-dropdown {
                 display: none;
-                z-index: 1;
             }
 
             .nav-links.top-[9%] {
@@ -62,8 +83,16 @@
             /* Hide the dropdown in mobile view */
             .nav-links .group:hover .navbar-dropdown {
                 display: none;
-                z-index: 1;
             }
+        }
+
+        @media only screen and (min-width: 1024px) and (max-width: 1279px) {
+            
+        }
+
+        .navbar-dropdown {
+            backdrop-filter: blur(20px);
+            box-shadow: var(--card-shadow);
         }
 
         .navbar-dropdown:hover .navbar-dropdown {
@@ -73,29 +102,32 @@
         
         /* Hide the images by default */
         .fade {
-            animation-name: fade;
+            animation: fade 2s ease-in-out, slideUp 1s ease-out;
             animation-duration: 1.5s;
         }
 
         @keyframes fade {
-            from { opacity: .4 }
+            from { opacity: 0 }
             to { opacity: 1 }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
         }
 
         .nav-links a.active {
             border-bottom: 2px solid #338b93; /* Set the underline color */
         }
 
-        .middle{
-            display: grid;
-            justify-content: center;
-            align-items: center;
-        }
-
         .hover-underline-animation {
             display: inline-block;
             position: relative;
-            transition: var(--transition);
         }
 
         .hover-underline-animation:after {
@@ -103,13 +135,12 @@
             position: absolute;
             width: 100%;
             transform: scaleX(0);
-            height: 3px;
+            height: 4px;
             bottom: 0;
             left: 0;
             background: var(--accent-gradient);
             transform-origin: bottom right;
-            transition: var(--transition);
-            border-radius: 2px;
+            transition: transform 0.25s ease-out;
         }
 
         .hover-underline-animation:hover:after {
@@ -117,11 +148,18 @@
             transform-origin: bottom left;
         }
 
+        .middle{
+            display: grid;
+            justify-content: center;
+            align-items: center;
+        }  
+        
         .logos{
             display: grid;
             justify-content: center;
             align-items: center;
             transition: var(--transition);
+            animation: float 6s ease-in-out infinite;
         }
 
         .logos img{
@@ -130,7 +168,8 @@
         }
 
         .logos:hover{
-            transform: translateY(-8px) scale(1.05);
+            transform: translateY(-15px) scale(1.08);
+            animation-play-state: paused;
         }
 
         .cust-logos{
@@ -139,6 +178,7 @@
             align-items: center;
             transition: var(--transition);
             mix-blend-mode: multiply;
+            animation: float 4s ease-in-out infinite;
         }
 
         .cust-logos img{
@@ -147,14 +187,15 @@
         }
 
         .cust-logos:hover{
-            transform: translateY(-5px) scale(1.08);
+            transform: translateY(-12px) scale(1.12);
+            animation-play-state: paused;
         }
 
         .enhanced-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: var(--border-radius);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: var(--border-radius-lg);
             box-shadow: var(--card-shadow);
             transition: var(--transition);
             overflow: hidden;
@@ -167,15 +208,16 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 4px;
+            height: 6px;
             background: var(--accent-gradient);
             transform: scaleX(0);
             transition: var(--transition);
         }
 
         .enhanced-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--card-shadow-hover);
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: var(--card-shadow-intense);
+            border: 1px solid rgba(255, 255, 255, 0.5);
         }
 
         .enhanced-card:hover::before {
@@ -183,18 +225,18 @@
         }
 
         .section-title {
-            font-size: 3.5rem;
+            font-size: 4rem;
             font-weight: 700;
-            background: var(--primary-gradient);
+            background: var(--sunset-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             text-align: center;
-            margin-bottom: 1rem;
+            margin-bottom: 2rem;
         }
 
         .section-subtitle {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             color: #64748b;
             text-align: center;
             margin-bottom: 3rem;
@@ -202,18 +244,20 @@
         }
 
         .enhanced-button {
-            background: var(--accent-gradient);
+            background: var(--sunset-gradient);
             border: none;
-            border-radius: 50px;
-            padding: 12px 32px;
+            border-radius: 60px;
+            padding: 16px 40px;
             color: white;
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 1.1rem;
             cursor: pointer;
-            transition: var(--transition);
-            box-shadow: 0 4px 15px rgba(67, 233, 123, 0.3);
+            transition: var(--transition-bounce);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
             position: relative;
             overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .enhanced-button::before {
@@ -223,7 +267,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
             transition: left 0.5s;
         }
 
@@ -232,223 +276,219 @@
         }
 
         .enhanced-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(67, 233, 123, 0.4);
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.6);
         }
 
         .content-section {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border-radius: var(--border-radius);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--border-radius-lg);
             padding: 4rem 2rem;
             margin: 2rem 0;
             box-shadow: var(--card-shadow);
+            transition: var(--transition);
+        }
+
+        .content-section:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--card-shadow-hover);
         }
 
         .slideshow-container {
             position: relative;
-            border-radius: var(--border-radius);
+            border-radius: var(--border-radius-lg);
             overflow: hidden;
-            box-shadow: var(--card-shadow);
+            box-shadow: var(--card-shadow-intense);
+            transition: var(--transition);
+        }
+
+        .slideshow-container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 50px 100px rgba(0, 0, 0, 0.2);
         }
 
         .form-container {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: var(--border-radius);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: var(--border-radius-lg);
             padding: 2rem;
             box-shadow: var(--card-shadow);
+            transition: var(--transition);
+        }
+
+        .form-container:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--card-shadow-hover);
         }
 
         .form-container input,
         .form-container textarea {
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 12px 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 16px;
+            padding: 16px 20px;
             transition: var(--transition);
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            color: #333;
+            font-size: 1rem;
         }
 
         .form-container input:focus,
         .form-container textarea:focus {
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            border-color: rgba(255, 107, 107, 0.8);
+            box-shadow: 0 0 0 4px rgba(255, 107, 107, 0.2);
             outline: none;
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.02);
         }
 
         .divider {
-            height: 2px;
-            background: var(--primary-gradient);
-            border-radius: 1px;
+            height: 4px;
+            background: var(--sunset-gradient);
+            border-radius: 2px;
             margin: 3rem 0;
-            opacity: 0.3;
-        }
+            opacity: 0.6;
+            box-shadow: 0 2px 10px rgba(255, 107, 107, 0.3);
         }
     </style>
-
     <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
 </head>
 
-<body class="font-[Poppins] flex flex-col min-h-screen">
-    <header class="glass-effect sticky top-0 z-50">
+<body class="font-[Poppins] bg-gradient-to-t from-[#b6f492] to-[#ffffff] no-repeat flex flex-col min-h-screen">
+    <header class="bg-white">
         <nav class="flex justify-between items-center w-[92%] mx-auto z-10">
             <a href="/index.html">
-                <img class="w-40 cursor-pointer transition-transform duration-300 hover:scale-105" src="/Images/logo.png" alt="SCT Solutions">
+                <img class="w-40 cursor-pointer" src="/Images/logo.png" alt="...">
             </a>
-            <div class="nav-links duration-500 md:static absolute glass-effect md:bg-transparent md:backdrop-filter-none md:min-h-fit min-h-[35vh] left-0 top-[-100%] md:w-auto w-full flex items-center px-5 md:border-0 border border-white/20 rounded-lg md:rounded-none">
+            
+            <div class="nav-links duration-500 md:static absolute bg-white md:min-h-fit min-h-[35vh] left-0 top-[-100%] md:w-auto w-full flex items-center px-5">
                 <ul class="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8">
                     
                     <li>
                         <div class="group relative">
-                            <a id="navbar-dropdown" class="hover-underline-animation font-medium text-gray-700 hover:text-gray-900" href="/index.html">Home</a>
+                            <a id="navbar-dropdown" class="hover-underline-animation" href="/index.html">Home</a>
                         </div>
                     </li>
 
                     <li>
                         <div class="group relative">
-                            <a id="navbar-dropdown" class="hover-underline-animation font-medium text-gray-700 hover:text-gray-900" href="/AboutUs/about.html">About Us</a>
+                            <a id="navbar-dropdown" class="hover-underline-animation" href="/AboutUs/about.html">About Us</a>
                         </div>
                     </li>
 
                     <li>
-                        <div class="group relative z-2">
-                            <a id="navbar-dropdown" class="hover-underline-animation font-medium text-gray-700 hover:text-gray-900" href="/products/products-categories.html">Products</a>
-                            <ul class="navbar-dropdown absolute hidden group-hover:block glass-effect rounded-lg p-4 grid grid-cols-2 gap-4 shadow-lg border border-white/20">
+                        <div class="group relative">
+                            <a id="navbar-dropdown" class="hover-underline-animation" href="/products/products-categories.html">Products</a>
+                            <ul class="navbar-dropdown absolute hidden group-hover:block bg-white grid grid-cols-2 gap-4">
                                 <li>
-                                    <a class="block px-4 py-2 text-gray-700 hover:bg-white/50 rounded-lg transition-colors" href="/products/tubes/tubes.html">Tubes</a>
+                                    <a class="block px-4 py-2 text-gray-800 hover:bg-gray-200" href="/products/tubes/tubes.html">Tubes</a>
                                 </li>
                                 <li>
-                                    <a class="block px-4 py-2 text-gray-700 hover:bg-white/50 rounded-lg transition-colors" href="/products/valves/valves.html">Valves</a>
+                                    <a class="block px-4 py-2 text-gray-800 hover:bg-gray-200" href="/products/valves/valves.html">Valves</a>
                                 </li>
                                 <li>
-                                    <a class="block px-4 py-2 text-gray-700 hover:bg-white/50 rounded-lg transition-colors" href="/products/fittings/fittings.html">Fittings</a>
+                                    <a class="block px-4 py-2 text-gray-800 hover:bg-gray-200" href="/products/fittings/fittings.html">Fittings</a>
                                 </li>
                                 <li>
-                                    <a class="block px-4 py-2 text-gray-700 hover:bg-white/50 rounded-lg transition-colors" href="/products/regulators/regulators.html">Regulators</a>
+                                    <a class="block px-4 py-2 text-gray-800 hover:bg-gray-200" href="/products/regulators/regulators.html">Regulators</a>
                                 </li>
                                 <li>
-                                    <a class="block px-4 py-2 text-gray-700 hover:bg-white/50 rounded-lg transition-colors" href="/products/accessories/accessories.html">Accessories</a>
+                                    <a class="block px-4 py-2 text-gray-800 hover:bg-gray-200" href="/products/accessories/accessories.html">Accessories</a>
                                 </li>
+                                <!-- Add more items as needed -->
                             </ul>
                         </div>
                     </li>
 
                     <li>
                         <div class="group relative">
-                            <a id="navbar-dropdown" class="hover-underline-animation font-medium text-gray-700 hover:text-gray-900" href="/Customers/customers.html">Customers</a>
+                            <a id="navbar-dropdown" class="hover-underline-animation" href="/Customers/customers.html">Customers</a>
                         </div>
                     </li>
                 </ul>
             </div>
+
             <div class="flex items-center gap-6">
-                <button onclick="redirectToContact()" class="enhanced-button">Contact Us</button>
+                <button onclick="redirectToContact()" class="bg-gradient-to-t from-[#b6f492] to-[#338b93] text-white px-5 py-2 rounded-full hover:bg-[#87acec]">Contact Us</button>
                 <ion-icon onclick="onToggleMenu(this)" name="menu" class="text-3xl cursor-pointer md:hidden"></ion-icon>
             </div>
         </nav>
-    </header>
-
-    <div class="w-full px-4 mt-4">
-        <div class="slideshow-container">
-          <a href="/products/tubes/tubes.html">
-            <div class="mySlides fade">
-                <img class="hidden md:block" src="/Images/Home Slideshow/1.png" style="width:100%">
-                <img class="block md:hidden" src="/Images/Home Slideshow/1-mobile.png" style="width:100%">
-              </div>
-          </a>
-      
-          <a href="/Customers/customers.html">
-            <div class="mySlides fade">
-                <img class="hidden md:block" src="/Images/Home Slideshow/2.png" style="width:100%">
-                <img class="block md:hidden" src="/Images/Home Slideshow/2-mobile.png" style="width:100%">
-              </div>
-          </a>
-      
-          <a href="/products/products-categories.html">
-            <div class="mySlides fade">
-                <img class="hidden md:block" src="/Images/Home Slideshow/3.png" style="width:100%">
-                <img class="block md:hidden" src="/Images/Home Slideshow/3-mobile.png" style="width:100%">
-              </div>
-          </a>
-
-          <a href="/AboutUs/about.html">
-            <div class="mySlides fade">
-                <img class="hidden md:block" src="/Images/Home Slideshow/4.png" style="width:100%">
-                <img class="block md:hidden" src="/Images/Home Slideshow/4-mobile.png" style="width:100%">
-              </div>
-          </a>
-        </div>
-    </div>
-      
-    <section class="content-section mx-4 lg:mx-8">
-        <h2 class="section-title">SCT Solutions</h2>
-        <p class="section-subtitle max-w-4xl mx-auto">Welcome to SCT Solutions, your trusted partner in the world of semiconductor and solar industry solutions. At SCT, we are a leading provider of essential components, specialising in tubes, valves, fittings, and consumables critical to the heart of semiconductor and solar manufacturing</p>
-        <p class="text-lg text-gray-600 text-center max-w-4xl mx-auto leading-relaxed">Explore our extensive product portfolio, meticulously curated to cater to the diverse requirements of modern manufacturing processes. From precision tubes that form the backbone of your operations to valves and fittings that ensure seamless integration, SCT Solutions is your one-stop destination for all your essential component needs</p>
+    </header>   
+    
+    <section class="text-gray-800">
+        <h2 class="text-3xl font-bold mt-4 text-center sm:text-5xl">SCT Solutions</h2>
+        <p class="max-w-3xl mx-auto mt-4 text-2xl font-bold text-center">Products</p>
+        <p class="max-w-3xl mx-auto mt-4 text-xl text-center">"We are a prominent supplier of essential components, specializing in tubes, valves, fittings, and critical consumables pivotal to the core of semiconductor and solar manufacturing"</p>
     </section>
 
-    <div class="middle mx-auto px-4 lg:px-10">
+    <br>
+
+    <div class="middle mx-auto px-10 text">
         <div class="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-5 gap-20">
             
             <div class="middle logos">
-                <div class="enhanced-card max-w-sm">
+                <div class="max-w-sm border border-gray-200 rounded-lg" style="border-color: #225400; box-shadow: #225400;">
                     <a href="/products/tubes/tubes.html">
-                        <img class="rounded-t-lg h-60 p-6 w-full object-contain" src="/Images/Cards/Tubes copy.png" alt="Tubes" />
+                        <img class="rounded-t-lg h-60 p-3" src="/Images/Cards/Tubes copy.png" alt="" />
                     </a>
-                    <div class="p-4">
+                    <div class="middle my-2">
                         <a href="/products/tubes/tubes.html">
-                            <h5 class="text-center text-xl font-semibold text-gray-800 hover:text-blue-600 transition-colors">Tubes</h5>
+                            <h5 class="mb-2 text-center text-xl tracking-tight text-gray-800">Tubes</h5>
                         </a>
                     </div>
                 </div>
             </div>
 
             <div class="middle logos">
-                <div class="enhanced-card max-w-sm">
+                <div class="max-w-sm border border-gray-200 rounded-lg" style="border-color: #225400; box-shadow: #225400;">
                     <a href="/products/valves/valves.html">
-                        <img class="rounded-t-lg h-60 p-6 w-full object-contain" src="/Images/Cards/Valves.png" alt="Valves" />
+                        <img class="rounded-t-lg h-60" src="/Images/Cards/Valves.png" alt="" />
                     </a>
-                    <div class="p-4">
+                    <div class="middle my-2">
                         <a href="/products/valves/valves.html">
-                            <h5 class="text-center text-xl font-semibold text-gray-800 hover:text-blue-600 transition-colors">Valves</h5>
+                            <h5 class="mb-2 text-center text-xl tracking-tight text-gray-800">Valves</h5>
                         </a>
                     </div>
                 </div>
             </div>
 
             <div class="middle logos">
-                <div class="enhanced-card max-w-sm">
+                <div class="max-w-sm border border-gray-200 rounded-lg" style="border-color: #225400; box-shadow: #225400;">
                     <a href="/products/fittings/fittings.html">
-                        <img class="rounded-t-lg h-60 p-6 w-full object-contain" src="/Images/Cards/Fittings.png" alt="Fittings" />
+                        <img class="rounded-t-lg h-60" src="/Images/Cards/Fittings.png" alt="" />
                     </a>
-                    <div class="p-4">
+                    <div class="middle my-2">
                         <a href="/products/fittings/fittings.html">
-                            <h5 class="text-center text-xl font-semibold text-gray-800 hover:text-blue-600 transition-colors">Fittings</h5>
+                            <h5 class="mb-2 text-center text-xl tracking-tight text-gray-800">Fittings</h5>
                         </a>
                     </div>
                 </div>
             </div>
 
             <div class="middle logos">
-                <div class="enhanced-card max-w-sm">
+                <div class="max-w-sm border border-gray-200 rounded-lg" style="border-color: #225400; box-shadow: #225400;">
                     <a href="/products/regulators/regulators.html">
-                        <img class="rounded-t-lg h-60 p-6 w-full object-contain" src="/Images/Cards/Regulators.png" alt="Regulators" />
+                        <img class="rounded-t-lg h-60" src="/Images/Cards/Regulators.png" alt="" />
                     </a>
-                    <div class="p-4">
+                    <div class="middle my-2">
                         <a href="/products/regulators/regulators.html">
-                            <h5 class="text-center text-xl font-semibold text-gray-800 hover:text-blue-600 transition-colors">Regulators</h5>
+                            <h5 class="mb-2 text-center text-xl tracking-tight text-gray-800">Regulators</h5>
                         </a>
                     </div>
                 </div>
             </div>
 
             <div class="middle logos">
-                <div class="enhanced-card max-w-sm">
+                <div class="max-w-sm border border-gray-200 rounded-lg" style="border-color: #225400; box-shadow: #225400;">
                     <a href="/products/accessories/accessories.html">
-                        <img class="rounded-t-lg h-60 p-6 w-full object-contain" src="/Images/Cards/Accessories.png" alt="Accessories" />
+                        <img class="rounded-t-lg h-60" src="/Images/Cards/Accessories.png" alt="" />
                     </a>
-                    <div class="p-4">
+                    <div class="middle my-2">
                         <a href="/products/accessories/accessories.html">
-                            <h5 class="text-center text-xl font-semibold text-gray-800 hover:text-blue-600 transition-colors">Accessories</h5>
+                            <h5 class="mb-2 text-center text-xl tracking-tight text-gray-800">Accessories</h5>
                         </a>
                     </div>
                 </div>
@@ -456,132 +496,50 @@
         </div>
     </div>
 
-    <div class="divider mx-4 lg:mx-10"></div>
+    <br>
 
-    <section class="content-section mx-4 lg:mx-8">
-        <h3 class="text-3xl font-bold text-center gradient-text mb-8">Our Customers Make Us Great</h3>
-    </section>   
-
-    <div class="container mx-auto px-4 lg:px-10 mb-12">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-            <div class="cust-logos">
-                <div class="enhanced-card p-4">
-                    <img src="/Customers/Images/agem.png" alt="AGEM" class="w-full h-20 object-contain">
-                </div>
-            </div>
-            <div class="cust-logos">
-                <div class="enhanced-card p-4">
-                    <img src="/Customers/Images/adani.png" alt="Adani" class="w-full h-20 object-contain">
-                </div>
-            </div>
-            <div class="cust-logos">
-                <div class="enhanced-card p-4">
-                    <img src="/Customers/Images/logosan.png" alt="Logosan" class="w-full h-20 object-contain">
-                </div>
-            </div>
-            <div class="cust-logos">
-                <div class="enhanced-card p-4">
-                    <img src="/Customers/Images/tata-power.png" alt="Tata Power" class="w-full h-20 object-contain">
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="divider mx-4 lg:mx-10"></div>
-
-    <section class="content-section mx-4 lg:mx-8">
-        <h3 class="text-3xl font-bold text-center gradient-text mb-8">Get in touch</h3>
-    </section>  
-
-    <div class="container pb-12 mx-auto text-center px-4">
-        <div class="grid grid-cols-1 gap-12 lg:grid-cols-2">
-            <div class="form-container">
-                <form action="https://api.web3forms.com/submit" method="POST">
-                    <input type="hidden" name="access_key" value="b7396014-d286-4f31-9e51-136a6788f939">
-                    <div class="mb-4">
-                        <label for="name" class="block text-sm font-semibold text-gray-700 mb-2">Name</label>
-                        <input type="text" id="name" name="name" class="w-full" placeholder="Your full name">
-                    </div>
-                    
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                        <div class="mb-4">
-                            <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">Email</label>
-                            <input type="email" id="email" name="email" class="w-full" placeholder="your@email.com">
-                        </div>
-                        <div class="mb-4">
-                            <label for="phone" class="block text-sm font-semibold text-gray-700 mb-2">Phone Number</label>
-                            <input type="tel" id="phone" name="phone" class="w-full" placeholder="+91 XXXXX XXXXX">
-                        </div>
-                    </div>
-                    <div class="mb-4">
-                        <label for="purpose" class="block text-sm font-semibold text-gray-700 mb-2">Purpose of Contacting</label>
-                        <textarea id="purpose" name="purpose" rows="4" class="w-full resize-none" placeholder="Tell us how we can help you..."></textarea>
-                    </div>
-            
-                    <div class="flex justify-end">
-                        <button type="submit" class="enhanced-button">Submit Message</button>
-                    </div>
-                </form>
-            </div>
-            
-            <div class="form-container h-96 p-0 overflow-hidden">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d18021.9947579853!2d72.91902612290404!3d19.15091444282867!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b9b18fe9f6a7%3A0x7fa376a0e7022678!2sFilix%20Towers!5e0!3m2!1sen!2sin!4v1708957092056!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
-            </div>
-        </div>
-    </div>
-
-    <footer class="bg-gradient-to-r from-gray-900 to-gray-800 text-white text-center mt-auto">
-        <div class="main-footer">
+    <footer class="bg-gray-800 text-white text-center">
+        <div class="main-footer bg-gray-800">
             <div class="container mx-auto py-8">
                 <div class="grid grid-cols-1 gap-y-6 md:grid-cols-2 lg:grid-cols-4">
                     <div class="column">
-                        <h4 class="text-white text-lg font-bold mb-4">Contact Information</h4>
-                        <div class="space-y-2">
-                            <p class="text-gray-300 font-semibold">Call Us</p>
-                            <a class="block text-blue-400 hover:text-blue-300 transition-colors" href="tel:8928024703">+91 8928024703</a>
-                            <a class="block text-blue-400 hover:text-blue-300 transition-colors" href="tel:9029426185">+91 9029426185</a>
-                            <p class="text-gray-300 font-semibold mt-4">Email Us</p>
-                            <a class="block text-blue-400 hover:text-blue-300 transition-colors text-sm" href="mailto:chinmay.panchal@sctspl.com">chinmay.panchal@sctspl.com</a>
-                            <a class="block text-blue-400 hover:text-blue-300 transition-colors text-sm" href="mailto:nayan.jain@sctspl.com">nayan.jain@sctspl.com</a>
-                            <a class="block text-blue-400 hover:text-blue-300 transition-colors text-sm" href="mailto:sales1@sctspl.com">sales1@sctspl.com</a>
-                        </div>
+                        <span class="icon-phone-call phone-icon"></span>
+                        <span class="call-us text-white text-sm font-regular font-bold">Call Us</span><br>
+                        <a class="mt-1 text-blue-500" href="tel:8928024703">+91 8928024703</a><br>
+                        <a class="mt-1 text-blue-500" href="tel:9029426185">+91 9029426185</a><br>
+                        <span class="icon-envelope phone-icon"></span><br>
+                        <span class="call-us text-white text-sm font-regular font-bold">Email Us</span><br>
+                        <a class="mt-1 text-blue-500" href="mailto:chinmay.panchal@sctspl.com">chinmay.panchal@sctspl.com</a><br>
+                        <a class="mt-1 text-blue-500" href="mailto:nayan.jain@sctspl.com">nayan.jain@sctspl.com</a><br>
+                        <a class="mt-1 text-blue-500" href="mailto:sales1@sctspl.com">sales1@sctspl.com</a><br>
                     </div>
                     <div class="column hidden md:block">
-                        <h4 class="text-white text-lg font-bold mb-4">Quick Links</h4>
-                        <div class="space-y-2">
-                            <a class="block text-blue-400 hover:text-blue-300 transition-colors" href="/index.html">Home</a>
-                            <a class="block text-blue-400 hover:text-blue-300 transition-colors" href="/AboutUs/about.html">About Us</a>
-                            <a class="block text-blue-400 hover:text-blue-300 transition-colors" href="/products/products-categories.html">Products</a>
-                            <a class="block text-blue-400 hover:text-blue-300 transition-colors" href="/Customers/customers.html">Customers</a>
-                            <a class="block text-blue-400 hover:text-blue-300 transition-colors" href="/ContactUs/contact.html">Contact Us</a>
-                        </div>
+                        <span class="py-auto mb-4 text-sm font-bold text-white">Menu</span><br><br>
+                        <a class="text-blue-500" href="/index.html">Home</a><br>
+                        <a class="text-blue-500" href="/AboutUs/about.html">About Us</a><br>
+                        <a class="text-blue-500" href="/products/products-categories.html">Products</a><br>
+                        <a class="text-blue-500" href="/Customers/customers.html">Customers</a><br>
+                        <a class="text-blue-500" href="/ContactUs/contact.html">Contact Us</a>
                     </div>
                     <div class="column hidden md:block">
-                        <h4 class="text-white text-lg font-bold mb-4">Products</h4>
-                        <div class="space-y-2">
-                            <a class="block text-blue-400 hover:text-blue-300 transition-colors" href="/products/tubes/tubes.html">Tubes</a>
-                            <a class="block text-blue-400 hover:text-blue-300 transition-colors" href="/products/valves/valves.html">Valves</a>
-                            <a class="block text-blue-400 hover:text-blue-300 transition-colors" href="/products/fittings/fittings.html">Fittings</a>
-                            <a class="block text-blue-400 hover:text-blue-300 transition-colors" href="/products/regulators/regulators.html">Regulators</a>
-                            <a class="block text-blue-400 hover:text-blue-300 transition-colors" href="/products/accessories/accessories.html">Accessories</a>
-                        </div>
+                        <a class="py-auto text-sm font-bold text-white" href="/products/products-categories.html">Products</a><br><br>
+                        <a class="text-blue-500" href="/products/tubes/tubes.html">Tubes</a><br>
+                        <a class="text-blue-500" href="/products/valves/valves.html">Valves</a><br>
+                        <a class="text-blue-500" href="/products/fittings/fittings.html">Fittings</a><br>
+                        <a class="text-blue-500" href="/products/regulators/regulators.html">Regulators</a><br>
+                        <a class="text-blue-500" href="/products/accessories/accessories.html">Accessories</a>
                     </div>
                     <div class="column">
-                        <h4 class="text-white text-lg font-bold mb-4">Find Us</h4>
-                        <div class="space-y-2">
-                            <p class="text-gray-300 font-semibold">SCT Solutions</p>
-                            <a class="text-blue-400 hover:text-blue-300 transition-colors text-sm leading-relaxed" href="https://maps.app.goo.gl/x8dYGDLaB2i9ADyi9">605, 6th Floor, Filix Condolium, Opposite Asian paints, LBS Marg Road, Bhandup West, Mumbai-400078</a>
-                        </div>
+                        <span class="text-sm font-bold text-white">Find Us</span><br><br>
+                        <span class="py-auto mb-4 text-sm text-white">SCT Solutions</span><br>
+                        <a class=" px-5 text-blue-500" href="https://maps.app.goo.gl/x8dYGDLaB2i9ADyi9">605, 6th Floor, Filix Condolium, Opposite Asian paints, LBS Marg Road, Bhandup West, Mumbai-400078</a>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="bg-gray-900 text-gray-300 py-6 border-t border-gray-700">
-            <div class="container mx-auto px-4">
-                <p class="text-center">&copy; 2024 SCTSPL. All rights reserved.</p>
-                <p class="text-center text-sm mt-1">GST: 27ABMCS4612E1ZC</p>
-            </div>
+        <div class="bg-gray-800 text-white py-4 mt-auto">
+            &copy; 2024 SCTSPL. All rights reserved.<br>
+            GST: 27ABMCS4612E1ZC
         </div>
     </footer>
     
@@ -610,21 +568,6 @@
         function redirectToContact() {
             // Redirect to contact.html
             window.location.href = "/ContactUs/contact.html";
-        }
-        
-        var slideIndex = 0;
-        showSlides();
-
-        function showSlides() {
-            var i;
-            var slides = document.getElementsByClassName("mySlides");
-            for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-            }
-            slideIndex++;
-            if (slideIndex > slides.length) {slideIndex = 1}
-            slides[slideIndex-1].style.display = "block";
-            setTimeout(showSlides, 6000); // Change image every 2 seconds
         }
     </script>
 </body>

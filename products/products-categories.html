@@ -12,6 +12,53 @@
     <title>SCT Solutions</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --accent-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            --sunset-gradient: linear-gradient(135deg, #ff6b6b 0%, #feca57 50%, #48dbfb 100%);
+            --cosmic-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            --card-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+            --card-shadow-hover: 0 30px 60px rgba(0, 0, 0, 0.12);
+            --card-shadow-intense: 0 40px 80px rgba(0, 0, 0, 0.15);
+            --border-radius: 16px;
+            --border-radius-lg: 24px;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background-size: 400% 400%;
+            background-attachment: fixed;
+            min-height: 100vh;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .gradient-text {
+            background: var(--sunset-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .navbar-dropdown {
+            backdrop-filter: blur(20px);
+            box-shadow: var(--card-shadow);
+        }
+
         @media screen and (max-width: 960px) {
             .navbar-dropdown {
                 display: none;
@@ -35,13 +82,19 @@
             display: grid;
             justify-content: center;
             align-items: center;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
         }  
         
         .logos{
             display: grid;
             justify-content: center;
             align-items: center;
-            transition: transform 0.5s ease;
+            transition: var(--transition-bounce);
         }
 
         .logos img{
@@ -50,7 +103,9 @@
         }
 
         .logos:hover{
-            transform: scale(1.1);
+            transform: scale(1.15) translateY(-10px);
+            animation-play-state: paused;
+            filter: brightness(1.1);
         }
 
         .nav-links a.active {
@@ -67,12 +122,13 @@
             position: absolute;
             width: 100%;
             transform: scaleX(0);
-            height: 2px;
+            height: 4px;
             bottom: 0;
             left: 0;
-            background-color: #5eff00;
+            background: var(--sunset-gradient);
             transform-origin: bottom right;
-            transition: transform 0.25s ease-out;
+            transition: var(--transition);
+            border-radius: 2px;
         }
 
         .hover-underline-animation:hover:after {
@@ -80,142 +136,219 @@
             transform-origin: bottom left;
         }
 
+        .enhanced-button {
+            background: var(--sunset-gradient);
+            border: none;
+            border-radius: 60px;
+            padding: 16px 40px;
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition-bounce);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .enhanced-button:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.6);
+        }
+
+        .product-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: var(--sunset-gradient);
+            transform: scaleX(0);
+            transition: var(--transition);
+        }
+
+        .product-card:hover {
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: var(--card-shadow-intense);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .product-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .section-title {
+            font-size: 4rem;
+            font-weight: 800;
+            background: var(--sunset-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .section-description {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            line-height: 1.6;
+            max-width: 4xl;
+            margin: 0 auto;
+        }
     </style>
     <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
 </head>
 
-<body class="font-[Poppins] bg-gradient-to-t from-[#b6f492] to-[#ffffff] no-repeat flex flex-col min-h-screen">
-    <header class="bg-white">
+<body class="font-[Poppins] flex flex-col min-h-screen">
+    <header class="glass-effect sticky top-0 z-50">
         <nav class="flex justify-between items-center w-[92%] mx-auto z-10">
             <a href="/index.html">
-                <img class="w-40 cursor-pointer" src="/Images/logo.png" alt="...">
+                <img class="w-40 cursor-pointer transition-transform duration-300 hover:scale-105" src="/Images/logo.png" alt="SCT Solutions">
             </a>
             
-            <div class="nav-links duration-500 md:static absolute bg-white md:min-h-fit min-h-[35vh] left-0 top-[-100%] md:w-auto w-full flex items-center px-5">
+            <div class="nav-links duration-500 md:static absolute glass-effect md:bg-transparent md:backdrop-filter-none md:min-h-fit min-h-[35vh] left-0 top-[-100%] md:w-auto w-full flex items-center px-5 md:border-0 border border-white/20 rounded-lg md:rounded-none">
                 <ul class="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8">
                     
                     <li>
                         <div class="group relative">
-                            <a id="navbar-dropdown" class="hover-underline-animation" href="/index.html">Home</a>
+                            <a id="navbar-dropdown" class="hover-underline-animation font-medium text-gray-700 hover:text-gray-900" href="/index.html">Home</a>
                         </div>
                     </li>
 
                     <li>
                         <div class="group relative">
-                            <a id="navbar-dropdown" class="hover-underline-animation" href="/AboutUs/about.html">About Us</a>
+                            <a id="navbar-dropdown" class="hover-underline-animation font-medium text-gray-700 hover:text-gray-900" href="/AboutUs/about.html">About Us</a>
                         </div>
                     </li>
 
                     <li>
                         <div class="group relative">
-                            <a id="navbar-dropdown" class="hover-underline-animation" href="/products/products-categories.html">Products</a>
-                            <ul class="navbar-dropdown absolute hidden group-hover:block bg-white grid grid-cols-2 gap-4">
+                            <a id="navbar-dropdown" class="hover-underline-animation font-medium text-gray-700 hover:text-gray-900" href="/products/products-categories.html">Products</a>
+                            <ul class="navbar-dropdown absolute hidden group-hover:block glass-effect rounded-lg p-4 grid grid-cols-2 gap-4 shadow-lg border border-white/20">
                                 <li>
-                                    <a class="block px-4 py-2 text-gray-800 hover:bg-gray-200" href="/products/tubes/tubes.html">Tubes</a>
+                                    <a class="block px-4 py-2 text-gray-700 hover:bg-white/50 rounded-lg transition-colors" href="/products/tubes/tubes.html">Tubes</a>
                                 </li>
                                 <li>
-                                    <a class="block px-4 py-2 text-gray-800 hover:bg-gray-200" href="/products/valves/valves.html">Valves</a>
+                                    <a class="block px-4 py-2 text-gray-700 hover:bg-white/50 rounded-lg transition-colors" href="/products/valves/valves.html">Valves</a>
                                 </li>
                                 <li>
-                                    <a class="block px-4 py-2 text-gray-800 hover:bg-gray-200" href="/products/fittings/fittings.html">Fittings</a>
+                                    <a class="block px-4 py-2 text-gray-700 hover:bg-white/50 rounded-lg transition-colors" href="/products/fittings/fittings.html">Fittings</a>
                                 </li>
                                 <li>
-                                    <a class="block px-4 py-2 text-gray-800 hover:bg-gray-200" href="/products/regulators/regulators.html">Regulators</a>
+                                    <a class="block px-4 py-2 text-gray-700 hover:bg-white/50 rounded-lg transition-colors" href="/products/regulators/regulators.html">Regulators</a>
                                 </li>
                                 <li>
-                                    <a class="block px-4 py-2 text-gray-800 hover:bg-gray-200" href="/products/accessories/accessories.html">Accessories</a>
+                                    <a class="block px-4 py-2 text-gray-700 hover:bg-white/50 rounded-lg transition-colors" href="/products/accessories/accessories.html">Accessories</a>
                                 </li>
-                                <!-- Add more items as needed -->
                             </ul>
                         </div>
                     </li>
 
                     <li>
                         <div class="group relative">
-                            <a id="navbar-dropdown" class="hover-underline-animation" href="/Customers/customers.html">Customers</a>
+                            <a id="navbar-dropdown" class="hover-underline-animation font-medium text-gray-700 hover:text-gray-900" href="/Customers/customers.html">Customers</a>
                         </div>
                     </li>
                 </ul>
             </div>
 
             <div class="flex items-center gap-6">
-                <button onclick="redirectToContact()" class="bg-gradient-to-t from-[#b6f492] to-[#338b93] text-white px-5 py-2 rounded-full hover:bg-[#87acec]">Contact Us</button>
+                <button onclick="redirectToContact()" class="enhanced-button">Contact Us</button>
                 <ion-icon onclick="onToggleMenu(this)" name="menu" class="text-3xl cursor-pointer md:hidden"></ion-icon>
             </div>
         </nav>
     </header>   
     
-    <section class="text-gray-800">
-        <h2 class="text-3xl font-bold mt-4 text-center sm:text-5xl">SCT Solutions</h2>
-        <p class="max-w-3xl mx-auto mt-4 text-2xl font-bold text-center">Products</p>
-        <p class="max-w-3xl mx-auto mt-4 text-xl text-center">"We are a prominent supplier of essential components, specializing in tubes, valves, fittings, and critical consumables pivotal to the core of semiconductor and solar manufacturing"</p>
+    <section class="py-16 px-4">
+        <h2 class="section-title">SCT Solutions</h2>
+        <p class="section-subtitle">Products</p>
+        <p class="section-description max-w-5xl mx-auto">"We are a prominent supplier of essential components, specializing in tubes, valves, fittings, and critical consumables pivotal to the core of semiconductor and solar manufacturing"</p>
     </section>
-
-    <br>
 
     <div class="middle mx-auto px-10 text">
         <div class="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-5 gap-20">
             
             <div class="middle logos">
-                <div class="max-w-sm border border-gray-200 rounded-lg" style="border-color: #225400; box-shadow: #225400;">
+                <div class="product-card max-w-sm">
                     <a href="/products/tubes/tubes.html">
-                        <img class="rounded-t-lg h-60 p-3" src="/Images/Cards/Tubes copy.png" alt="" />
+                        <img class="rounded-t-lg h-60 p-6 w-full object-contain" src="/Images/Cards/Tubes copy.png" alt="Tubes" />
                     </a>
-                    <div class="middle my-2">
+                    <div class="p-4">
                         <a href="/products/tubes/tubes.html">
-                            <h5 class="mb-2 text-center text-xl tracking-tight text-gray-800">Tubes</h5>
+                            <h5 class="text-center text-xl font-semibold text-white hover:text-cyan-300 transition-colors">Tubes</h5>
                         </a>
                     </div>
                 </div>
             </div>
 
             <div class="middle logos">
-                <div class="max-w-sm border border-gray-200 rounded-lg" style="border-color: #225400; box-shadow: #225400;">
+                <div class="product-card max-w-sm">
                     <a href="/products/valves/valves.html">
-                        <img class="rounded-t-lg h-60" src="/Images/Cards/Valves.png" alt="" />
+                        <img class="rounded-t-lg h-60 p-6 w-full object-contain" src="/Images/Cards/Valves.png" alt="Valves" />
                     </a>
-                    <div class="middle my-2">
+                    <div class="p-4">
                         <a href="/products/valves/valves.html">
-                            <h5 class="mb-2 text-center text-xl tracking-tight text-gray-800">Valves</h5>
+                            <h5 class="text-center text-xl font-semibold text-white hover:text-cyan-300 transition-colors">Valves</h5>
                         </a>
                     </div>
                 </div>
             </div>
 
             <div class="middle logos">
-                <div class="max-w-sm border border-gray-200 rounded-lg" style="border-color: #225400; box-shadow: #225400;">
+                <div class="product-card max-w-sm">
                     <a href="/products/fittings/fittings.html">
-                        <img class="rounded-t-lg h-60" src="/Images/Cards/Fittings.png" alt="" />
+                        <img class="rounded-t-lg h-60 p-6 w-full object-contain" src="/Images/Cards/Fittings.png" alt="Fittings" />
                     </a>
-                    <div class="middle my-2">
+                    <div class="p-4">
                         <a href="/products/fittings/fittings.html">
-                            <h5 class="mb-2 text-center text-xl tracking-tight text-gray-800">Fittings</h5>
+                            <h5 class="text-center text-xl font-semibold text-white hover:text-cyan-300 transition-colors">Fittings</h5>
                         </a>
                     </div>
                 </div>
             </div>
 
             <div class="middle logos">
-                <div class="max-w-sm border border-gray-200 rounded-lg" style="border-color: #225400; box-shadow: #225400;">
+                <div class="product-card max-w-sm">
                     <a href="/products/regulators/regulators.html">
-                        <img class="rounded-t-lg h-60" src="/Images/Cards/Regulators.png" alt="" />
+                        <img class="rounded-t-lg h-60 p-6 w-full object-contain" src="/Images/Cards/Regulators.png" alt="Regulators" />
                     </a>
-                    <div class="middle my-2">
+                    <div class="p-4">
                         <a href="/products/regulators/regulators.html">
-                            <h5 class="mb-2 text-center text-xl tracking-tight text-gray-800">Regulators</h5>
+                            <h5 class="text-center text-xl font-semibold text-white hover:text-cyan-300 transition-colors">Regulators</h5>
                         </a>
                     </div>
                 </div>
             </div>
 
             <div class="middle logos">
-                <div class="max-w-sm border border-gray-200 rounded-lg" style="border-color: #225400; box-shadow: #225400;">
+                <div class="product-card max-w-sm">
                     <a href="/products/accessories/accessories.html">
-                        <img class="rounded-t-lg h-60" src="/Images/Cards/Accessories.png" alt="" />
+                        <img class="rounded-t-lg h-60 p-6 w-full object-contain" src="/Images/Cards/Accessories.png" alt="Accessories" />
                     </a>
-                    <div class="middle my-2">
+                    <div class="p-4">
                         <a href="/products/accessories/accessories.html">
-                            <h5 class="mb-2 text-center text-xl tracking-tight text-gray-800">Accessories</h5>
+                            <h5 class="text-center text-xl font-semibold text-white hover:text-cyan-300 transition-colors">Accessories</h5>
                         </a>
                     </div>
                 </div>
@@ -223,48 +356,85 @@
         </div>
     </div>
 
-    <br>
+    <div class="py-16"></div>
 
-    <footer class="bg-gray-800 text-white text-center">
+    <footer class="bg-gradient-to-r from-gray-900 via-purple-900 to-gray-800 text-white text-center mt-auto">
         <div class="main-footer bg-gray-800">
             <div class="container mx-auto py-8">
                 <div class="grid grid-cols-1 gap-y-6 md:grid-cols-2 lg:grid-cols-4">
                     <div class="column">
                         <span class="icon-phone-call phone-icon"></span>
                         <span class="call-us text-white text-sm font-regular font-bold">Call Us</span><br>
-                        <a class="mt-1 text-blue-500" href="tel:8928024703">+91 8928024703</a><br>
-                        <a class="mt-1 text-blue-500" href="tel:9029426185">+91 9029426185</a><br>
+                        <a class="mt-1 text-cyan-400 hover:text-cyan-300 transition-colors" href="tel:8928024703">+91 8928024703</a><br>
+                        <a class="mt-1 text-cyan-400 hover:text-cyan-300 transition-colors" href="tel:9029426185">+91 9029426185</a><br>
                         <span class="icon-envelope phone-icon"></span><br>
                         <span class="call-us text-white text-sm font-regular font-bold">Email Us</span><br>
-                        <a class="mt-1 text-blue-500" href="mailto:chinmay.panchal@sctspl.com">chinmay.panchal@sctspl.com</a><br>
-                        <a class="mt-1 text-blue-500" href="mailto:nayan.jain@sctspl.com">nayan.jain@sctspl.com</a><br>
-                        <a class="mt-1 text-blue-500" href="mailto:sales1@sctspl.com">sales1@sctspl.com</a><br>
+                        <a class="mt-1 text-cyan-400 hover:text-cyan-300 transition-colors" href="mailto:chinmay.panchal@sctspl.com">chinmay.panchal@sctspl.com</a><br>
+                        <a class="mt-1 text-cyan-400 hover:text-cyan-300 transition-colors" href="mailto:nayan.jain@sctspl.com">nayan.jain@sctspl.com</a><br>
+                        <a class="mt-1 text-cyan-400 hover:text-cyan-300 transition-colors" href="mailto:sales1@sctspl.com">sales1@sctspl.com</a><br>
                     </div>
                     <div class="column hidden md:block">
                         <span class="py-auto mb-4 text-sm font-bold text-white">Menu</span><br><br>
-                        <a class="text-blue-500" href="/index.html">Home</a><br>
-                        <a class="text-blue-500" href="/AboutUs/about.html">About Us</a><br>
-                        <a class="text-blue-500" href="/products/products-categories.html">Products</a><br>
-                        <a class="text-blue-500" href="/Customers/customers.html">Customers</a><br>
-                        <a class="text-blue-500" href="/ContactUs/contact.html">Contact Us</a>
+                        <a class="text-cyan-400 hover:text-cyan-300 transition-colors" href="/index.html">Home</a><br>
+                        <a class="text-cyan-400 hover:text-cyan-300 transition-colors" href="/AboutUs/about.html">About Us</a><br>
+                        <a class="text-cyan-400 hover:text-cyan-300 transition-colors" href="/products/products-categories.html">Products</a><br>
+                        <a class="text-cyan-400 hover:text-cyan-300 transition-colors" href="/Customers/customers.html">Customers</a><br>
+                        <a class="text-cyan-400 hover:text-cyan-300 transition-colors" href="/ContactUs/contact.html">Contact Us</a>
                     </div>
                     <div class="column hidden md:block">
                         <a class="py-auto text-sm font-bold text-white" href="/products/products-categories.html">Products</a><br><br>
-                        <a class="text-blue-500" href="/products/tubes/tubes.html">Tubes</a><br>
-                        <a class="text-blue-500" href="/products/valves/valves.html">Valves</a><br>
-                        <a class="text-blue-500" href="/products/fittings/fittings.html">Fittings</a><br>
-                        <a class="text-blue-500" href="/products/regulators/regulators.html">Regulators</a><br>
-                        <a class="text-blue-500" href="/products/accessories/accessories.html">Accessories</a>
+                        <a class="text-cyan-400 hover:text-cyan-300 transition-colors" href="/products/tubes/tubes.html">Tubes</a><br>
+                        <a class="text-cyan-400 hover:text-cyan-300 transition-colors" href="/products/valves/valves.html">Valves</a><br>
+                        <a class="text-cyan-400 hover:text-cyan-300 transition-colors" href="/products/fittings/fittings.html">Fittings</a><br>
+                        <a class="text-cyan-400 hover:text-cyan-300 transition-colors" href="/products/regulators/regulators.html">Regulators</a><br>
+                        <a class="text-cyan-400 hover:text-cyan-300 transition-colors" href="/products/accessories/accessories.html">Accessories</a>
                     </div>
                     <div class="column">
                         <span class="text-sm font-bold text-white">Find Us</span><br><br>
                         <span class="py-auto mb-4 text-sm text-white">SCT Solutions</span><br>
-                        <a class=" px-5 text-blue-500" href="https://maps.app.goo.gl/x8dYGDLaB2i9ADyi9">605, 6th Floor, Filix Condolium, Opposite Asian paints, LBS Marg Road, Bhandup West, Mumbai-400078</a>
+                        <a class=" px-5 text-cyan-400 hover:text-cyan-300 transition-colors" href="https://maps.app.goo.gl/x8dYGDLaB2i9ADyi9">605, 6th Floor, Filix Condolium, Opposite Asian paints, LBS Marg Road, Bhandup West, Mumbai-400078</a>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="bg-gray-800 text-white py-4 mt-auto">
+        <div class="bg-gray-900 text-gray-300 py-6 border-t border-purple-700">
+            <div class="container mx-auto px-4">
+                <p class="text-center">&copy; 2024 SCTSPL. All rights reserved.</p>
+                <p class="text-center text-sm mt-1">GST: 27ABMCS4612E1ZC</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        const navDropdown = document.querySelector('.navbar-dropdown');
+
+        function onToggleMenu(e) {
+            if (window.innerWidth > 767) {
+                e.name = e.name === 'menu' ? 'close' : 'menu';
+                navLinks.classList.toggle('top-[9%]');
+            }
+        }
+
+        // Close the dropdown on window resize for smaller screens
+        window.addEventListener('resize', function () {
+            if (window.innerWidth <= 767) {
+                navLinks.classList.remove('top-[9%]');
+            }
+        });
+        const navLinks = document.querySelector('.nav-links')
+
+        function onToggleMenu(e) {
+            e.name = e.name === 'menu' ? 'close' : 'menu'
+            navLinks.classList.toggle('top-[9%]')
+        }
+        function redirectToContact() {
+            // Redirect to contact.html
+            window.location.href = "/ContactUs/contact.html";
+        }
+    </script>
+</body>
+
+</html>
             &copy; 2024 SCTSPL. All rights reserved.<br>
             GST: 27ABMCS4612E1ZC
         </div>
